@@ -7,28 +7,17 @@
 <title>CONTROL DE WT</title>
 <link rel="manifest" href="manifest.webmanifest">
 <style>
-:root{--bg:#0b0f12;--card:#141a1f;--card2:#1a2228;--text:#f3f5f6;--muted:#9aa6ae;--green:#18c37e;--amber:#f0ad35;--red:#ef5350;--line:#29343c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{padding:18px 16px 10px;position:sticky;top:0;background:rgba(11,15,18,.96);z-index:5;border-bottom:1px solid var(--line)}
-h1{font-size:24px;margin:0;text-align:center;letter-spacing:.5px}
-main{max-width:760px;margin:auto;padding:14px 12px 90px}.screen{display:none}.screen.active{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0}
-.hero{width:100%;padding:22px;border:0;border-radius:18px;background:var(--green);color:#06140e;font-size:20px;font-weight:800}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.grid3{grid-template-columns:repeat(3,1fr)}
-.stat{padding:14px;border-radius:14px;background:var(--card2);text-align:center}.stat b{display:block;font-size:30px;margin-top:4px}.stat span{color:var(--muted);font-size:12px}
-button,.chip,select,input,textarea{font:inherit}button,.chip{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:12px;padding:13px;cursor:pointer}
-button.selected,.chip.selected{border-color:var(--green);background:rgba(24,195,126,.14)}
-button.green{background:var(--green);color:#06140e;border-color:var(--green);font-weight:800}
-button.danger{background:rgba(239,83,80,.12);border-color:var(--red)}
-label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}input,textarea,select{width:100%;background:#0e1418;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px}textarea{min-height:80px;resize:vertical}
-nav{position:fixed;bottom:0;left:0;right:0;background:#10161a;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
-nav button{border:0;border-radius:0;background:transparent;padding:9px 3px;font-size:11px;color:var(--muted)}nav button.active{color:var(--green)}
-.badge{display:inline-block;padding:5px 8px;border-radius:8px;font-size:11px;font-weight:700}.on{background:rgba(24,195,126,.15);color:var(--green)}.off{background:rgba(240,173,53,.15);color:var(--amber)}
-.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.small{font-size:12px;color:var(--muted)}.wt{font-size:19px;font-weight:800}
-#reader{width:100%;overflow:hidden;border-radius:14px;background:#000;min-height:260px}
-.item{padding:13px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}
-.toast{position:fixed;left:12px;right:12px;bottom:72px;padding:13px;border-radius:12px;background:#203129;border:1px solid var(--green);display:none;z-index:20}
-@media(min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
+:root{--bg:#080c0f;--card:#11181d;--card2:#182127;--text:#f4f7f8;--muted:#91a0a9;--green:#19d486;--amber:#f5b63e;--red:#ff5b58;--blue:#43a8ff;--line:#2a3740;--shadow:0 8px 24px rgba(0,0,0,.22)}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;-webkit-tap-highlight-color:transparent}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);background-size:32px 32px;z-index:-1}
+header{padding:15px 16px 12px;position:sticky;top:0;background:rgba(8,12,15,.97);z-index:5;border-bottom:1px solid var(--line);box-shadow:0 3px 16px rgba(0,0,0,.25)}h1{font-size:22px;margin:0;text-align:center;letter-spacing:1.4px;font-weight:900}h1:before{content:"●";color:var(--green);font-size:13px;margin-right:8px;vertical-align:3px}
+main{max-width:760px;margin:auto;padding:12px 11px 94px}.screen{display:none}.screen.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;margin:10px 0;box-shadow:var(--shadow)}.card h3{margin:0 0 12px;font-size:15px;letter-spacing:.5px}.hero{width:100%;min-height:72px;padding:18px;border:1px solid #24e69a;border-radius:17px;background:linear-gradient(135deg,#19d486,#12b96f);color:#04140d;font-size:20px;font-weight:900;letter-spacing:.2px;box-shadow:0 7px 20px rgba(25,212,134,.15)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.grid3{grid-template-columns:repeat(3,1fr)}.stat{padding:14px 8px;border-radius:14px;background:var(--card2);text-align:center;border:1px solid #223039}.stat b{display:block;font-size:34px;line-height:1.05;margin-top:5px}.stat span{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.5px}.onlineStat b{color:var(--green)}.offlineStat b{color:var(--amber)}
+button,.chip,select,input,textarea{font:inherit}button,.chip{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:13px;padding:15px 12px;min-height:52px;cursor:pointer;font-weight:750;touch-action:manipulation}button:active{transform:scale(.985)}button.selected,.chip.selected{border-color:var(--green);background:rgba(25,212,134,.14);box-shadow:inset 0 0 0 1px rgba(25,212,134,.18)}button.green{background:var(--green);color:#04140d;border-color:var(--green);font-weight:900}.cameraBtn{width:100%;font-size:17px}.stopBtn{width:100%;background:rgba(255,91,88,.12);border-color:var(--red);color:#ffb0ae}.secondary{background:#10171c}.danger{background:rgba(255,91,88,.12)!important;border-color:var(--red)!important;color:#ffb0ae}label{display:block;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.4px;margin:13px 0 6px}input,textarea,select{width:100%;background:#0b1115;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:14px;min-height:52px}textarea{min-height:80px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid rgba(25,212,134,.35);border-color:var(--green)}
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(14,20,24,.98);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:10;padding-bottom:max(4px,env(safe-area-inset-bottom));box-shadow:0 -5px 18px rgba(0,0,0,.3)}nav button{border:0;border-radius:0;background:transparent;padding:8px 2px 9px;min-height:56px;font-size:10px;color:var(--muted);font-weight:800}nav button.active{color:var(--green)}nav button span{display:block;font-size:19px;margin-bottom:2px}
+.badge{display:inline-block;padding:6px 9px;border-radius:9px;font-size:10px;font-weight:900;letter-spacing:.3px}.on{background:rgba(25,212,134,.15);color:var(--green)}.off{background:rgba(245,182,62,.15);color:var(--amber)}.warn{background:rgba(255,91,88,.14);color:#ff8c89}.blue{background:rgba(67,168,255,.14);color:var(--blue)}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.small{font-size:12px;color:var(--muted)}.wt{font-size:20px;font-weight:900;letter-spacing:.4px}.sectionTitle{display:flex;justify-content:space-between;align-items:center}.sectionTitle h3{margin:0}.kpiTitle{display:flex;align-items:center;gap:7px}.kpiDot{width:9px;height:9px;border-radius:50%;display:inline-block;background:var(--green)}.kpiDot.amber{background:var(--amber)}
+#reader{width:100%;overflow:hidden;border-radius:14px;background:#020405;min-height:250px;border:1px solid #26333b}#reader video{border-radius:13px}.cameraState{margin-top:8px;text-align:center}.item{padding:13px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.offCard{border-left:4px solid var(--amber)}.onCard{border-left:4px solid var(--green)}.reason{margin:7px 0;font-size:14px}.toast{position:fixed;left:11px;right:11px;bottom:76px;padding:14px 15px;border-radius:13px;background:#17231e;border:1px solid var(--green);display:none;z-index:30;font-weight:800;box-shadow:var(--shadow)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-end;justify-content:center;z-index:40;padding:12px}.modal.show{display:flex}.modalBox{width:min(560px,100%);background:#11181d;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.5)}.modalBox h2{margin:0 0 6px;font-size:22px}.modalWT{font-size:32px;font-weight:950;letter-spacing:1px;margin:8px 0}.confirmInfo{background:#0c1216;border:1px solid var(--line);border-radius:13px;padding:12px;margin:12px 0}.modalActions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.scanPulse{animation:pulse 1.2s infinite}@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(25,212,134,.08)}}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}.modal{align-items:center}.hero{min-height:78px}}
 </style>
 </head>
 <body>
@@ -36,9 +25,9 @@ nav button{border:0;border-radius:0;background:transparent;padding:9px 3px;font-
 <main>
 <section id="home" class="screen active">
 <button class="hero" onclick="show('scan')">📷 IR A ESCANEO DE QR</button>
-<div class="card"><h3>WT EN LÍNEA</h3><div class="grid">
+<div class="card"><div class="sectionTitle"><h3 class="kpiTitle"><span class="kpiDot"></span> WT EN LÍNEA</h3><span class="badge on">PRODUCCIÓN</span></div><div class="grid onlineStat">
 <div class="stat"><span>LÍNEA 1</span><b id="l1">0</b></div><div class="stat"><span>LÍNEA 2</span><b id="l2">0</b></div><div class="stat"><span>TOTAL</span><b id="totalOn">0</b></div></div></div>
-<div class="card"><h3>WT FUERA DE LÍNEA</h3><div class="grid">
+<div class="card"><div class="sectionTitle"><h3 class="kpiTitle"><span class="kpiDot amber"></span> WT FUERA DE LÍNEA</h3><span class="badge off">PENDIENTES</span></div><div class="grid offlineStat">
 <div class="stat"><span>LÍNEA 1</span><b id="off1">0</b></div><div class="stat"><span>LÍNEA 2</span><b id="off2">0</b></div><div class="stat"><span>TOTAL</span><b id="totalOff">0</b></div></div>
 <div class="grid grid3" style="margin-top:10px"><div class="stat"><span>MRC</span><b id="mrc">0</b></div><div class="stat"><span>SUELO</span><b id="floor">0</b></div><div class="stat"><span>CALIDAD</span><b id="quality">0</b></div></div></div>
 </section>
@@ -52,59 +41,83 @@ nav button{border:0;border-radius:0;background:transparent;padding:9px 3px;font-
 <label>Motivo</label><input id="reason" placeholder="Ej. Holgura de pasador">
 <div class="grid" style="margin-top:8px"><button class="chip" onclick="quick('HOLGURA DE PASADOR')">HOLGURA</button><button class="chip" onclick="quick('PIN ROTO')">PIN ROTO</button><button class="chip" onclick="quick('CONTROL DE SERIE')">CONTROL SERIE</button><button class="chip" onclick="quick('MUESTRA DE CALIDAD')">CALIDAD</button></div>
 </div>
-<div class="card"><h3>PASO 2 · ESCANEO</h3><div id="reader"></div><button class="green" style="width:100%;margin-top:10px" onclick="startScanner()">📷 ABRIR CÁMARA Y ESCANEAR</button><p class="small">También puedes introducir el WT manualmente para probar la aplicación.</p><div class="row"><input id="manualWT" placeholder="A1005 / B1012"><button onclick="processWT(document.getElementById('manualWT').value)">OK</button></div></div>
+<div class="card"><h3>PASO 2 · ESCANEO</h3><div id="reader"></div><div class="grid" style="margin-top:10px"><button class="green cameraBtn" onclick="startScanner()">📷 INICIAR CÁMARA</button><button class="stopBtn" onclick="stopScanner()">■ PARAR CÁMARA</button></div><div id="cameraState" class="small cameraState">Cámara detenida</div><p class="small">El escaneo es continuo. Tras detectar un WT, la app espera confirmación antes de registrar el movimiento.</p><div class="row"><input id="manualWT" placeholder="A1005 / B1012"><button onclick="processWT(document.getElementById('manualWT').value)">OK</button></div></div>
 </section>
 
-<section id="off" class="screen"><div class="card"><h3>WT FUERA DE LÍNEA</h3><div class="grid"><select id="filterLine" onchange="render()"><option value="">Todas las líneas</option><option value="LÍNEA 1">Línea 1</option><option value="LÍNEA 2">Línea 2</option></select><select id="filterLoc" onchange="render()"><option value="">Todas ubicaciones</option><option>MRC</option><option>SUELO TALLER</option><option>CALIDAD</option></select></div></div><div id="offList"></div></section>
+<section id="off" class="screen"><div class="card"><div class="sectionTitle"><h3 class="kpiTitle"><span class="kpiDot amber"></span> WT FUERA DE LÍNEA</h3><span class="badge off">PENDIENTES</span></div><div class="grid offlineStat"><select id="filterLine" onchange="render()"><option value="">Todas las líneas</option><option value="LÍNEA 1">Línea 1</option><option value="LÍNEA 2">Línea 2</option></select><select id="filterLoc" onchange="render()"><option value="">Todas ubicaciones</option><option>MRC</option><option>SUELO TALLER</option><option>CALIDAD</option></select></div></div><div id="offList"></div></section>
 
 <section id="db" class="screen"><div class="card"><div class="row"><h3>BASE DE DATOS</h3><button onclick="downloadXLSX()">📥 XLSX</button></div><div id="dbList"></div></div><div class="card"><button class="danger" style="width:100%" onclick="resetDB()">⚠️ VACIAR BASE DE DATOS</button></div></section>
 
 <section id="history" class="screen"><div class="card"><div class="row"><h3>HISTORIAL</h3><button onclick="downloadXLSX()">📥 XLSX</button></div><div id="historyList"></div></div></section>
 </main>
-<nav><button onclick="show('home')" id="n-home" class="active">HOME</button><button onclick="show('off')" id="n-off">FUERA</button><button onclick="show('scan')" id="n-scan">📷 QR</button><button onclick="show('db')" id="n-db">DATOS</button><button onclick="show('history')" id="n-history">HISTORIAL</button></nav>
+<nav><button onclick="show('home')" id="n-home" class="active"><span>⌂</span>HOME</button><button onclick="show('off')" id="n-off"><span>⚠</span>FUERA</button><button onclick="show('scan')" id="n-scan"><span>▣</span>QR</button><button onclick="show('db')" id="n-db"><span>▤</span>DATOS</button><button onclick="show('history')" id="n-history"><span>◷</span>HISTORIAL</button></nav>
 <div id="toast" class="toast"></div>
+<div id="confirmModal" class="modal"><div class="modalBox"><h2 id="modalTitle">WT DETECTADO</h2><div id="modalWT" class="modalWT">A1005</div><div id="modalInfo" class="confirmInfo"></div><div id="modalActions" class="modalActions"></div></div></div>
 <script src="https://unpkg.com/html5-qrcode" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
 <script>
-const KEY='control_wt_v1';
-let state=JSON.parse(localStorage.getItem(KEY)||'{"wts":{},"history":[]}');
+const KEY='control_wt_v2';
+let state=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('control_wt_v1')||'{"wts":{},"history":[]}');
 let ctx={shift:autoShift(),op:'RETIRADA',loc:'MRC'};
-function save(){localStorage.setItem(KEY,JSON.stringify(state));render();}
+let scanner=null, scanBusy=false, lastScan={wt:'',time:0};
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
 function autoShift(){let h=new Date().getHours();return h>=6&&h<14?'MAÑANA':h>=14&&h<22?'TARDE':'NOCHE'}
-function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.getElementById('n-'+id).classList.add('active');render()}
+function show(id){if(id!=='scan') stopScanner();document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.getElementById('n-'+id).classList.add('active');render()}
 function setShift(x){ctx.shift=x;updateButtons()}
 function setOp(x){ctx.op=x;updateButtons();document.getElementById('locationWrap').style.display=x==='RETIRADA'?'block':'none'}
 function setLoc(x){ctx.loc=x;updateButtons()}
 function updateButtons(){['morning','afternoon','night'].forEach(id=>document.getElementById(id).classList.remove('selected'));document.getElementById(ctx.shift==='MAÑANA'?'morning':ctx.shift==='TARDE'?'afternoon':'night').classList.add('selected');document.getElementById('ret').classList.toggle('selected',ctx.op==='RETIRADA');document.getElementById('rein').classList.toggle('selected',ctx.op==='REINTRODUCCIÓN')}
 function quick(x){document.getElementById('reason').value=x}
 function lineOf(wt){return wt.toUpperCase().startsWith('A')?'LÍNEA 1':wt.toUpperCase().startsWith('B')?'LÍNEA 2':''}
-function processWT(raw){
- let wt=(raw||'').trim().toUpperCase().replace(/\s/g,''); if(!/^[AB][A-Z0-9_-]*$/.test(wt)){toast('WT no válido. Debe empezar por A o B.');return}
- let line=lineOf(wt);let reason=document.getElementById('reason').value.trim()||'Sin motivo indicado';let now=new Date().toISOString();
- let old=state.wts[wt];
- let location=ctx.op==='RETIRADA'?ctx.loc:line;
- state.wts[wt]={wt,line,status:ctx.op==='RETIRADA'?'FUERA DE LÍNEA':'EN LÍNEA',location,modified:now,shift:ctx.shift,reason};
- state.history.unshift({date:now,wt,operation:ctx.op,line,location,shift:ctx.shift,reason});
- save();document.getElementById('manualWT').value='';toast('✓ '+wt+' registrado · '+location);
+function validWT(wt){return /^[AB][A-Z0-9_-]*$/.test(wt)}
+function processWT(raw,forceAction=null){
+ let wt=(raw||'').trim().toUpperCase().replace(/\s/g,'');
+ if(!validWT(wt)){toast('⚠ WT NO VÁLIDO · Debe empezar por A o B');return}
+ let line=lineOf(wt), old=state.wts[wt];
+ if(forceAction==='REINTRODUCCIÓN' || ctx.op==='REINTRODUCCIÓN'){
+   if(!old){openConfirm(wt,'NO EXISTE EN LA BASE','Este WT no está registrado. No se puede reintroducir sin haberlo dado de alta.',[{text:'CANCELAR',cls:'secondary',fn:closeModal}]);return}
+   if(old.line!==line){openConfirm(wt,'⚠ INCONSISTENCIA A/B','El prefijo del WT no coincide con su línea registrada.',[{text:'CANCELAR',cls:'secondary',fn:closeModal}]);return}
+   if(old.status==='EN LÍNEA'){openConfirm(wt,'YA ESTÁ EN LÍNEA','Este WT ya figura como EN LÍNEA. No se registrará otro movimiento.',[{text:'CERRAR',cls:'secondary',fn:closeModal}]);return}
+   openConfirm(wt,'REINTRODUCIR WT','Confirmar vuelta a producción.',[{text:'CANCELAR',cls:'secondary',fn:closeModal},{text:'✓ REINTRODUCIR',cls:'green',fn:()=>commitWT(wt,'REINTRODUCCIÓN')}]);return;
+ }
+ if(old && old.line!==line){openConfirm(wt,'⚠ INCONSISTENCIA A/B','El prefijo del WT no coincide con la línea que figura en la base de datos.',[{text:'CERRAR',cls:'secondary',fn:closeModal}]);return}
+ if(old && old.status==='FUERA DE LÍNEA'){openConfirm(wt,'⚠ YA ESTÁ FUERA DE LÍNEA',`<b>Ubicación:</b> ${esc(old.location)}<br><b>Tiempo fuera:</b> ${mins(old.modified)} min<br><b>Motivo:</b> ${esc(old.reason)}`,[{text:'CANCELAR',cls:'secondary',fn:closeModal},{text:'↩ REINTRODUCIR',cls:'green',fn:()=>commitWT(wt,'REINTRODUCCIÓN')}]);return}
+ openConfirm(wt,'WT DETECTADO',`<b>Línea:</b> ${line}<br><b>Destino:</b> ${esc(ctx.loc)}<br><b>Turno:</b> ${ctx.shift}<br><b>Motivo:</b> ${esc(document.getElementById('reason').value.trim()||'Sin motivo indicado')}`,[{text:'CANCELAR',cls:'secondary',fn:closeModal},{text:'✓ REGISTRAR RETIRADA',cls:'green',fn:()=>commitWT(wt,'RETIRADA')}]);
 }
-let scanner=null;
-async function startScanner(){if(!window.Html5Qrcode){toast('El lector todavía está cargando.');return}if(scanner){try{await scanner.stop()}catch(e){}scanner=null}scanner=new Html5Qrcode('reader');try{await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:240,height:160}},txt=>{processWT(txt)},()=>{});toast('Cámara activa');}catch(e){toast('No se pudo abrir la cámara. Comprueba los permisos y HTTPS.');}}
+function commitWT(wt,operation){
+ let line=lineOf(wt), old=state.wts[wt], reason=operation==='REINTRODUCCIÓN'?'Reintroducción a producción':(document.getElementById('reason').value.trim()||'Sin motivo indicado'), now=new Date().toISOString();
+ let location=operation==='RETIRADA'?ctx.loc:line;
+ state.wts[wt]={wt,line,status:operation==='RETIRADA'?'FUERA DE LÍNEA':'EN LÍNEA',location,modified:now,shift:ctx.shift,reason};
+ state.history.unshift({date:now,wt,operation,line,location,shift:ctx.shift,reason});
+ save();closeModal();document.getElementById('manualWT').value='';
+ if(operation==='REINTRODUCCIÓN'){toast('✓ '+wt+' REINTRODUCIDO · '+line)}else{toast('✓ '+wt+' RETIRADO · '+ctx.loc)}
+}
+function openConfirm(wt,title,info,actions){document.getElementById('modalTitle').textContent=title;document.getElementById('modalWT').textContent=wt;document.getElementById('modalInfo').innerHTML=info;document.getElementById('modalActions').innerHTML=actions.map(a=>`<button class="${a.cls||''}">${a.text}</button>`).join('');[...document.querySelectorAll('#modalActions button')].forEach((b,i)=>b.onclick=actions[i].fn);document.getElementById('confirmModal').classList.add('show')}
+function closeModal(){document.getElementById('confirmModal').classList.remove('show')}
+async function startScanner(){
+ if(!window.Html5Qrcode){toast('⏳ El lector todavía está cargando');return}
+ if(scanner){toast('📷 La cámara ya está activa');return}
+ scanner=new Html5Qrcode('reader');scanBusy=false;
+ try{await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:250,height:170}},txt=>{handleScan(txt)},()=>{});document.getElementById('cameraState').textContent='● CÁMARA ACTIVA · ESCANEO CONTINUO';document.getElementById('cameraState').className='small cameraState scanPulse';toast('📷 Cámara activa')}catch(e){scanner=null;document.getElementById('cameraState').textContent='Cámara detenida';toast('⚠ No se pudo abrir la cámara · Comprueba permisos y HTTPS')}}
+async function stopScanner(){if(scanner){try{await scanner.stop()}catch(e){}try{await scanner.clear()}catch(e){}scanner=null}document.getElementById('cameraState').textContent='Cámara detenida';document.getElementById('cameraState').className='small cameraState'}
+function handleScan(txt){let wt=(txt||'').trim().toUpperCase().replace(/\s/g,'');if(!validWT(wt)||scanBusy)return;let now=Date.now();if(lastScan.wt===wt&&now-lastScan.time<4000)return;lastScan={wt,time:now};scanBusy=true;navigator.vibrate?.(80);processWT(wt);setTimeout(()=>scanBusy=false,900)}
 function mins(iso){return Math.max(0,Math.floor((Date.now()-new Date(iso))/60000))}
 function render(){
- updateButtons();let arr=Object.values(state.wts), on=arr.filter(x=>x.status==='EN LÍNEA'), off=arr.filter(x=>x.status==='FUERA DE LÍNEA');
+ updateButtons();let arr=Object.values(state.wts),on=arr.filter(x=>x.status==='EN LÍNEA'),off=arr.filter(x=>x.status==='FUERA DE LÍNEA');
  document.getElementById('l1').textContent=on.filter(x=>x.line==='LÍNEA 1').length;document.getElementById('l2').textContent=on.filter(x=>x.line==='LÍNEA 2').length;document.getElementById('totalOn').textContent=on.length;
  document.getElementById('off1').textContent=off.filter(x=>x.line==='LÍNEA 1').length;document.getElementById('off2').textContent=off.filter(x=>x.line==='LÍNEA 2').length;document.getElementById('totalOff').textContent=off.length;
  ['MRC','SUELO TALLER','CALIDAD'].forEach((l,i)=>document.getElementById(['mrc','floor','quality'][i]).textContent=off.filter(x=>x.location===l).length);
- let fl=document.getElementById('filterLine')?.value||'',fo=document.getElementById('filterLoc')?.value||'';let list=off.filter(x=>(!fl||x.line===fl)&&(!fo||x.location===fo));
- document.getElementById('offList').innerHTML=list.map(x=>`<div class="card"><div class="row"><span class="wt">${x.wt}</span><span class="badge off">FUERA</span></div><p>${x.location} · ⏱ ${mins(x.modified)} min</p><p class="small">${esc(x.reason)} · ${x.shift}</p><button class="green" style="width:100%" onclick="quickRein('${x.wt}')">REINTRODUCIR</button></div>`).join('')||'<div class="card small">No hay WT fuera de línea.</div>';
+ let fl=document.getElementById('filterLine')?.value||'',fo=document.getElementById('filterLoc')?.value||'';let list=off.filter(x=>(!fl||x.line===fl)&&(!fo||x.location===fo));document.getElementById('offCountBadge').textContent=off.length+' WT';
+ document.getElementById('offList').innerHTML=list.map(x=>`<div class="card offCard"><div class="row"><span class="wt">${x.wt}</span><span class="badge off">FUERA · ${esc(x.location)}</span></div><p class="reason">${esc(x.reason)}</p><p class="small">${x.line} · ⏱ ${mins(x.modified)} min · ${x.shift}</p><button class="green" style="width:100%" onclick="quickRein('${x.wt}')">↩ REINTRODUCIR A PRODUCCIÓN</button></div>`).join('')||'<div class="card small">No hay WT fuera de línea con estos filtros.</div>';
  document.getElementById('dbList').innerHTML=arr.map(x=>`<div class="item"><div class="row"><span class="wt">${x.wt}</span><span class="badge ${x.status==='EN LÍNEA'?'on':'off'}">${x.status}</span></div><div class="small">${x.line} · ${x.location} · ${new Date(x.modified).toLocaleString('es-ES')}</div></div>`).join('')||'<p class="small">Base de datos vacía.</p>';
- document.getElementById('historyList').innerHTML=state.history.map(x=>`<div class="item"><div class="row"><span class="wt">${x.wt}</span><span>${x.operation}</span></div><div class="small">${new Date(x.date).toLocaleString('es-ES')} · ${x.location} · ${x.shift}</div><div>${esc(x.reason)}</div></div>`).join('')||'<p class="small">Sin movimientos.</p>';
+ document.getElementById('historyList').innerHTML=state.history.map(x=>`<div class="item"><div class="row"><span class="wt">${x.wt}</span><span class="badge ${x.operation==='RETIRADA'?'off':'on'}">${x.operation}</span></div><div class="small">${new Date(x.date).toLocaleString('es-ES')} · ${x.location} · ${x.shift}</div><div class="reason">${esc(x.reason)}</div></div>`).join('')||'<p class="small">Sin movimientos.</p>';
 }
-function quickRein(wt){ctx.op='REINTRODUCCIÓN';document.getElementById('reason').value='Reintroducción a producción';processWT(wt)}
+function quickRein(wt){ctx.op='REINTRODUCCIÓN';updateButtons();processWT(wt,'REINTRODUCCIÓN')}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(window._t);window._t=setTimeout(()=>t.style.display='none',2500)}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(window._t);window._t=setTimeout(()=>t.style.display='none',2600)}
 function resetDB(){if(confirm('¿Seguro que quieres borrar todos los WT y el historial?')){state={wts:{},history:[]};save();toast('Base de datos vaciada')}}
-function downloadXLSX(){if(!window.XLSX){toast('Excel todavía está cargando.');return}let wb=XLSX.utils.book_new();let wt=Object.values(state.wts).map(x=>({'Número WT':x.wt,'Línea':x.line,'Estado Actual':x.status,'Ubicación Actual':x.location,'Fecha Modificación':new Date(x.modified).toLocaleString('es-ES'),'Turno':x.shift,'Motivo':x.reason}));let hi=state.history.map(x=>({'Fecha y hora':new Date(x.date).toLocaleString('es-ES'),'WT':x.wt,'Operación':x.operation,'Línea':x.line,'Ubicación destino':x.location,'Turno':x.shift,'Motivo':x.reason}));XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(wt),'WT ACTUALES');XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(hi),'HISTORIAL');XLSX.writeFile(wb,'CONTROL_WT.xlsx')}
+function downloadXLSX(){if(!window.XLSX){toast('⏳ Excel todavía está cargando');return}let wb=XLSX.utils.book_new();let wt=Object.values(state.wts).map(x=>({'Número WT':x.wt,'Línea':x.line,'Estado Actual':x.status,'Ubicación Actual':x.location,'Fecha Modificación':new Date(x.modified).toLocaleString('es-ES'),'Turno':x.shift,'Motivo':x.reason}));let hi=state.history.map(x=>({'Fecha y hora':new Date(x.date).toLocaleString('es-ES'),'WT':x.wt,'Operación':x.operation,'Línea':x.line,'Ubicación destino':x.location,'Turno':x.shift,'Motivo':x.reason}));XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(wt),'WT ACTUALES');XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(hi),'HISTORIAL');XLSX.writeFile(wb,'CONTROL_WT.xlsx')}
 render();
+</script>
 </script>
 </body></html>
