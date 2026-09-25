@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0f12">
+<title>CONTROL DE WT</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--bg:#0b0f12;--card:#141a1f;--card2:#1a2228;--text:#f3f5f6;--muted:#9aa6ae;--green:#18c37e;--amber:#f0ad35;--red:#ef5350;--line:#29343c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:18px 16px 10px;position:sticky;top:0;background:rgba(11,15,18,.96);z-index:5;border-bottom:1px solid var(--line)}
+h1{font-size:24px;margin:0;text-align:center;letter-spacing:.5px}
+main{max-width:760px;margin:auto;padding:14px 12px 90px}.screen{display:none}.screen.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0}
+.hero{width:100%;padding:22px;border:0;border-radius:18px;background:var(--green);color:#06140e;font-size:20px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.grid3{grid-template-columns:repeat(3,1fr)}
+.stat{padding:14px;border-radius:14px;background:var(--card2);text-align:center}.stat b{display:block;font-size:30px;margin-top:4px}.stat span{color:var(--muted);font-size:12px}
+button,.chip,select,input,textarea{font:inherit}button,.chip{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:12px;padding:13px;cursor:pointer}
+button.selected,.chip.selected{border-color:var(--green);background:rgba(24,195,126,.14)}
+button.green{background:var(--green);color:#06140e;border-color:var(--green);font-weight:800}
+button.danger{background:rgba(239,83,80,.12);border-color:var(--red)}
+label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}input,textarea,select{width:100%;background:#0e1418;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px}textarea{min-height:80px;resize:vertical}
+nav{position:fixed;bottom:0;left:0;right:0;background:#10161a;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
+nav button{border:0;border-radius:0;background:transparent;padding:9px 3px;font-size:11px;color:var(--muted)}nav button.active{color:var(--green)}
+.badge{display:inline-block;padding:5px 8px;border-radius:8px;font-size:11px;font-weight:700}.on{background:rgba(24,195,126,.15);color:var(--green)}.off{background:rgba(240,173,53,.15);color:var(--amber)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.small{font-size:12px;color:var(--muted)}.wt{font-size:19px;font-weight:800}
+#reader{width:100%;overflow:hidden;border-radius:14px;background:#000;min-height:260px}
+.item{padding:13px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}
+.toast{position:fixed;left:12px;right:12px;bottom:72px;padding:13px;border-radius:12px;background:#203129;border:1px solid var(--green);display:none;z-index:20}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header><h1>CONTROL DE WT</h1></header>
+<main>
+<section id="home" class="screen active">
+<button class="hero" onclick="show('scan')">📷 IR A ESCANEO DE QR</button>
+<div class="card"><h3>WT EN LÍNEA</h3><div class="grid">
+<div class="stat"><span>LÍNEA 1</span><b id="l1">0</b></div><div class="stat"><span>LÍNEA 2</span><b id="l2">0</b></div><div class="stat"><span>TOTAL</span><b id="totalOn">0</b></div></div></div>
+<div class="card"><h3>WT FUERA DE LÍNEA</h3><div class="grid">
+<div class="stat"><span>LÍNEA 1</span><b id="off1">0</b></div><div class="stat"><span>LÍNEA 2</span><b id="off2">0</b></div><div class="stat"><span>TOTAL</span><b id="totalOff">0</b></div></div>
+<div class="grid grid3" style="margin-top:10px"><div class="stat"><span>MRC</span><b id="mrc">0</b></div><div class="stat"><span>SUELO</span><b id="floor">0</b></div><div class="stat"><span>CALIDAD</span><b id="quality">0</b></div></div></div>
+</section>
+
+<section id="scan" class="screen">
+<div class="card"><h3>PASO 1 · CONTEXTO</h3>
+<label>Turno</label><div class="grid grid3">
+<button id="morning" onclick="setShift('MAÑANA')">☀️ MAÑANA</button><button id="afternoon" onclick="setShift('TARDE')">🌆 TARDE</button><button id="night" onclick="setShift('NOCHE')">🌙 NOCHE</button></div>
+<label>Operación</label><div class="grid"><button id="ret" onclick="setOp('RETIRADA')">RETIRADA DE LÍNEA</button><button id="rein" onclick="setOp('REINTRODUCCIÓN')">REINTRODUCCIÓN</button></div>
+<div id="locationWrap"><label>Ubicación destino</label><div class="grid grid3"><button onclick="setLoc('MRC')">MRC</button><button onclick="setLoc('SUELO TALLER')">SUELO</button><button onclick="setLoc('CALIDAD')">CALIDAD</button></div></div>
+<label>Motivo</label><input id="reason" placeholder="Ej. Holgura de pasador">
+<div class="grid" style="margin-top:8px"><button class="chip" onclick="quick('HOLGURA DE PASADOR')">HOLGURA</button><button class="chip" onclick="quick('PIN ROTO')">PIN ROTO</button><button class="chip" onclick="quick('CONTROL DE SERIE')">CONTROL SERIE</button><button class="chip" onclick="quick('MUESTRA DE CALIDAD')">CALIDAD</button></div>
+</div>
+<div class="card"><h3>PASO 2 · ESCANEO</h3><div id="reader"></div><button class="green" style="width:100%;margin-top:10px" onclick="startScanner()">📷 ABRIR CÁMARA Y ESCANEAR</button><p class="small">También puedes introducir el WT manualmente para probar la aplicación.</p><div class="row"><input id="manualWT" placeholder="A1005 / B1012"><button onclick="processWT(document.getElementById('manualWT').value)">OK</button></div></div>
+</section>
+
+<section id="off" class="screen"><div class="card"><h3>WT FUERA DE LÍNEA</h3><div class="grid"><select id="filterLine" onchange="render()"><option value="">Todas las líneas</option><option value="LÍNEA 1">Línea 1</option><option value="LÍNEA 2">Línea 2</option></select><select id="filterLoc" onchange="render()"><option value="">Todas ubicaciones</option><option>MRC</option><option>SUELO TALLER</option><option>CALIDAD</option></select></div></div><div id="offList"></div></section>
+
+<section id="db" class="screen"><div class="card"><div class="row"><h3>BASE DE DATOS</h3><button onclick="downloadXLSX()">📥 XLSX</button></div><div id="dbList"></div></div><div class="card"><button class="danger" style="width:100%" onclick="resetDB()">⚠️ VACIAR BASE DE DATOS</button></div></section>
+
+<section id="history" class="screen"><div class="card"><div class="row"><h3>HISTORIAL</h3><button onclick="downloadXLSX()">📥 XLSX</button></div><div id="historyList"></div></div></section>
+</main>
+<nav><button onclick="show('home')" id="n-home" class="active">HOME</button><button onclick="show('off')" id="n-off">FUERA</button><button onclick="show('scan')" id="n-scan">📷 QR</button><button onclick="show('db')" id="n-db">DATOS</button><button onclick="show('history')" id="n-history">HISTORIAL</button></nav>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/html5-qrcode" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+<script>
+const KEY='control_wt_v1';
+let state=JSON.parse(localStorage.getItem(KEY)||'{"wts":{},"history":[]}');
+let ctx={shift:autoShift(),op:'RETIRADA',loc:'MRC'};
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render();}
+function autoShift(){let h=new Date().getHours();return h>=6&&h<14?'MAÑANA':h>=14&&h<22?'TARDE':'NOCHE'}
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.getElementById('n-'+id).classList.add('active');render()}
+function setShift(x){ctx.shift=x;updateButtons()}
+function setOp(x){ctx.op=x;updateButtons();document.getElementById('locationWrap').style.display=x==='RETIRADA'?'block':'none'}
+function setLoc(x){ctx.loc=x;updateButtons()}
+function updateButtons(){['morning','afternoon','night'].forEach(id=>document.getElementById(id).classList.remove('selected'));document.getElementById(ctx.shift==='MAÑANA'?'morning':ctx.shift==='TARDE'?'afternoon':'night').classList.add('selected');document.getElementById('ret').classList.toggle('selected',ctx.op==='RETIRADA');document.getElementById('rein').classList.toggle('selected',ctx.op==='REINTRODUCCIÓN')}
+function quick(x){document.getElementById('reason').value=x}
+function lineOf(wt){return wt.toUpperCase().startsWith('A')?'LÍNEA 1':wt.toUpperCase().startsWith('B')?'LÍNEA 2':''}
+function processWT(raw){
+ let wt=(raw||'').trim().toUpperCase().replace(/\s/g,''); if(!/^[AB][A-Z0-9_-]*$/.test(wt)){toast('WT no válido. Debe empezar por A o B.');return}
+ let line=lineOf(wt);let reason=document.getElementById('reason').value.trim()||'Sin motivo indicado';let now=new Date().toISOString();
+ let old=state.wts[wt];
+ let location=ctx.op==='RETIRADA'?ctx.loc:line;
+ state.wts[wt]={wt,line,status:ctx.op==='RETIRADA'?'FUERA DE LÍNEA':'EN LÍNEA',location,modified:now,shift:ctx.shift,reason};
+ state.history.unshift({date:now,wt,operation:ctx.op,line,location,shift:ctx.shift,reason});
+ save();document.getElementById('manualWT').value='';toast('✓ '+wt+' registrado · '+location);
+}
+let scanner=null;
+async function startScanner(){if(!window.Html5Qrcode){toast('El lector todavía está cargando.');return}if(scanner){try{await scanner.stop()}catch(e){}scanner=null}scanner=new Html5Qrcode('reader');try{await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:240,height:160}},txt=>{processWT(txt)},()=>{});toast('Cámara activa');}catch(e){toast('No se pudo abrir la cámara. Comprueba los permisos y HTTPS.');}}
+function mins(iso){return Math.max(0,Math.floor((Date.now()-new Date(iso))/60000))}
+function render(){
+ updateButtons();let arr=Object.values(state.wts), on=arr.filter(x=>x.status==='EN LÍNEA'), off=arr.filter(x=>x.status==='FUERA DE LÍNEA');
+ document.getElementById('l1').textContent=on.filter(x=>x.line==='LÍNEA 1').length;document.getElementById('l2').textContent=on.filter(x=>x.line==='LÍNEA 2').length;document.getElementById('totalOn').textContent=on.length;
+ document.getElementById('off1').textContent=off.filter(x=>x.line==='LÍNEA 1').length;document.getElementById('off2').textContent=off.filter(x=>x.line==='LÍNEA 2').length;document.getElementById('totalOff').textContent=off.length;
+ ['MRC','SUELO TALLER','CALIDAD'].forEach((l,i)=>document.getElementById(['mrc','floor','quality'][i]).textContent=off.filter(x=>x.location===l).length);
+ let fl=document.getElementById('filterLine')?.value||'',fo=document.getElementById('filterLoc')?.value||'';let list=off.filter(x=>(!fl||x.line===fl)&&(!fo||x.location===fo));
+ document.getElementById('offList').innerHTML=list.map(x=>`<div class="card"><div class="row"><span class="wt">${x.wt}</span><span class="badge off">FUERA</span></div><p>${x.location} · ⏱ ${mins(x.modified)} min</p><p class="small">${esc(x.reason)} · ${x.shift}</p><button class="green" style="width:100%" onclick="quickRein('${x.wt}')">REINTRODUCIR</button></div>`).join('')||'<div class="card small">No hay WT fuera de línea.</div>';
+ document.getElementById('dbList').innerHTML=arr.map(x=>`<div class="item"><div class="row"><span class="wt">${x.wt}</span><span class="badge ${x.status==='EN LÍNEA'?'on':'off'}">${x.status}</span></div><div class="small">${x.line} · ${x.location} · ${new Date(x.modified).toLocaleString('es-ES')}</div></div>`).join('')||'<p class="small">Base de datos vacía.</p>';
+ document.getElementById('historyList').innerHTML=state.history.map(x=>`<div class="item"><div class="row"><span class="wt">${x.wt}</span><span>${x.operation}</span></div><div class="small">${new Date(x.date).toLocaleString('es-ES')} · ${x.location} · ${x.shift}</div><div>${esc(x.reason)}</div></div>`).join('')||'<p class="small">Sin movimientos.</p>';
+}
+function quickRein(wt){ctx.op='REINTRODUCCIÓN';document.getElementById('reason').value='Reintroducción a producción';processWT(wt)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(window._t);window._t=setTimeout(()=>t.style.display='none',2500)}
+function resetDB(){if(confirm('¿Seguro que quieres borrar todos los WT y el historial?')){state={wts:{},history:[]};save();toast('Base de datos vaciada')}}
+function downloadXLSX(){if(!window.XLSX){toast('Excel todavía está cargando.');return}let wb=XLSX.utils.book_new();let wt=Object.values(state.wts).map(x=>({'Número WT':x.wt,'Línea':x.line,'Estado Actual':x.status,'Ubicación Actual':x.location,'Fecha Modificación':new Date(x.modified).toLocaleString('es-ES'),'Turno':x.shift,'Motivo':x.reason}));let hi=state.history.map(x=>({'Fecha y hora':new Date(x.date).toLocaleString('es-ES'),'WT':x.wt,'Operación':x.operation,'Línea':x.line,'Ubicación destino':x.location,'Turno':x.shift,'Motivo':x.reason}));XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(wt),'WT ACTUALES');XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(hi),'HISTORIAL');XLSX.writeFile(wb,'CONTROL_WT.xlsx')}
+render();
+</script>
+</body></html>
